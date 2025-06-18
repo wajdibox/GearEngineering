@@ -1,0 +1,8 @@
+# Required Python packages
+numpy
+matplotlib
+scipy
+shapely
+tk
+pyqt5
+pydxf
