@@ -1,0 +1,15 @@
+# .gitignore
+
+# Julia notebooks artifacts
+JuliaNotebooks/Project.toml
+JuliaNotebooks/Manifest.toml
+
+# Python caches & tests you don’t want
+**/__pycache__/
+PythonCore/tests/
+generate_structure.py
+
+# VSCode & OS cruft
+.vscode/
+*.swp
+.DS_Store
