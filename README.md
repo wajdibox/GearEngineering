@@ -1,66 +1,65 @@
-📘 Top-Level README.md
-markdown
-Copier
-Modifier
 # GearREngineering
 
 **Real-Time Analytical Digital Twin for Gear Degradation**
 
 This repository implements a high-fidelity, real-time digital twin for gear geometry and wear modeling, combining:
 
-1. **PythonCore**  
+1. **PythonCore**
    Pure-Python modules for parametric gear geometry (involute, trochoid fillets, rounds), export to DXF/JSON/CSV, plus a CLI/GUI front-end.
-
-2. **JuliaNotebooks**  
-   Julia scripts to pull PythonCore profiles via PyCall, perform polar‐Fourier fitting, reconstruct profiles with FFT, and interactively explore gear parameters.
-
-3. **VizExports**  
+2. **JuliaNotebooks**
+   Julia scripts to pull PythonCore profiles via PyCall, perform polar‑Fourier fitting, reconstruct profiles with FFT, and interactively explore gear parameters.
+3. **VizExports**
    Helper scripts to export results and generate visualizations.
 
 ---
 
-### 🚀 Quickstart
+## 🚀 Quickstart
 
-1. **Clone the repo:**
-   ```sh
-   git clone https://github.com/<your-org>/GearREngineering.git
-   cd GearREngineering
-Python setup (in PythonCore/):
+### 1. Clone the repo
 
-sh
-Copier
-Modifier
+```bash
+git clone https://github.com/wajdibox/GearEngineering.git
+cd GearEngineering
+```
+
+### 2. PythonCore Setup
+
+```bash
 cd PythonCore
+git switch main  # or ensure latest branch
+git pull
 python3 -m venv .venv
-source .venv/bin/activate       # or .\.venv\Scripts\activate on Windows
+source .venv/bin/activate      # Windows: .\.venv\Scripts\activate
 pip install -r requirements.txt
-pip install -e .                # makes PythonCore importable
-Julia setup (in JuliaNotebooks/):
+pip install -e .                # makes `import PythonCore` work
+```
 
-sh
-Copier
-Modifier
+### 3. JuliaNotebooks Setup
+
+```bash
 cd ../JuliaNotebooks
 julia --project=.
 julia> using Pkg; Pkg.instantiate()
-Try it out:
+```
 
-Static demo:
+### 4. Try it out
 
-sh
-Copier
-Modifier
-julia --project=. gear_fourier_fit_polar.jl
-Interactive demo:
+* **Static demo**:
 
-sh
-Copier
-Modifier
-julia --project=. gear_fourier_fit_polar_interactive.jl
-📂 Repository Layout
-bash
-Copier
-Modifier
+  ```bash
+  julia --project=. gear_fourier_fit_polar.jl
+  ```
+* **Interactive demo**:
+
+  ```bash
+  julia --project=. gear_fourier_fit_polar_interactive.jl
+  ```
+
+---
+
+## 📂 Repository Layout
+
+```
 /
 ├── PythonCore/                 # Core geometry & export in Python
 │   ├── gear_parameters.py
@@ -68,42 +67,83 @@ Modifier
 │   ├── exports.py
 │   ├── gear_app.py
 │   ├── utils_plotting.py
-│   ├── README_PythonCore.md    # ← see below
+│   ├── README_PythonCore.md    # PythonCore usage & internals
 │   └── requirements.txt
 │
-├── JuliaNotebooks/             # Julia scripts for Fourier fitting & interactive demos
+├── JuliaNotebooks/             # Julia scripts for FFT fitting & interactive demos
 │   ├── gear_fourier_fit_polar.jl
 │   ├── gear_fourier_fit_polar_interactive.jl
-│   └── README_JuliaNotebooks.md# ← see below
+│   ├── gear_parametric_unified.jl
+│   └── README_JuliaNotebooks.md # Julia notebook instructions
 │
-└── README.md                   # ← you are here
-🔜 Next Steps
-STFT_Gear-fit.jl & STFT_Gear-fit_interactive.jl: incorporate time-frequency (STFT) analysis to map dynamic FFT features back to geometry updates.
+├── VizExports/                 # Visualization & export helpers
+│   └── README_VizExports.md
+│
+├── AppWorks/                   # High‑level application examples & pipelines
+│   └── USAGE_GUIDE.md
+│
+├── CommonIO/                   # Shared I/O utilities
+│   └── README_CommonIO.md
+│
+├── OmniverseDev/               # Omniverse integration notes
+│   └── README_OmniverseDev.md
+│
+├── README.md                   # ← This file
+└── requirements.txt            # top‑level dependencies if any
+```
 
-Wear evolution: integrate Archard’s law for incremental geometry updates.
+---
 
-Sensor fusion: merge vibration/acoustic signals to drive real-time twin updates.
+## 🔧 Git & Contribution Guide
 
-Publishing to GitHub
-Initialize & commit
+1. **Ignore large/temp files**: make sure `.gitignore` includes:
 
-sh
-Copier
-Modifier
-git init
-git add .
-git commit -m "Initial commit: PythonCore + JuliaNotebooks"
-Create a new remote repo on GitHub, then:
+   * `JuliaNotebooks/Project.toml`
+   * `JuliaNotebooks/Manifest.toml`
+   * `**/__pycache__/`
+   * `PythonCore/tests/`
+   * `generate_structure.py`
+   * `data/` and model checkpoints
+2. **Branching & commits**:
 
-sh
-Copier
-Modifier
-git remote add origin git@github.com:<your-org>/GearREngineering.git
-git push -u origin main
-Tag & release as needed:
+   ```bash
+   git checkout -b feature/YourFeature
+   # work… then:
+   git add <files>
+   git commit -m "feat: add …"
+   ```
+3. **Sync with upstream**:
 
-sh
-Copier
-Modifier
-git tag v0.1.0
-git push --tags
+   ```bash
+   git fetch origin
+   git rebase origin/main
+   ```
+4. **Push & PR**:
+
+   ```bash
+   git push -u origin feature/YourFeature
+   ```
+5. **Tagging releases**:
+
+   ```bash
+   git tag v0.1.0 -m "v0.1.0: initial release"
+   git push origin --tags
+   ```
+
+**Note**: avoid committing large data or generated caches—add them to `.gitignore` before staging.
+
+---
+
+## 🔜 Next Steps
+
+* **STFT\_Gear-fit.jl** & **STFT\_Gear-fit\_interactive.jl**: add short‑time FFT analysis for time‑frequency gear features.
+* **Wear evolution**: integrate Archard’s wear law for incremental geometry update.
+* **Sensor fusion**: merge vibration/acoustic signals to drive real‑time twin updates.
+
+---
+
+## 📄 LICENSE & CREDITS
+
+See [LICENSE](LICENSE) for terms.
+
+*Made with ❤️ by the Gear Engineering team.*
