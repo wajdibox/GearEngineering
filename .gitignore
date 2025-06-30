@@ -1,15 +1,20 @@
-# .gitignore
+# AppWorks: ignore build artifacts, caches, versioned downloads
+AppWorks/__pycache__/
+AppWorks/1.7.0
+AppWorks/1.21.0
+AppWorks/3.5.0
 
-# Julia notebooks artifacts
+# Julia notebooks env files
 JuliaNotebooks/Project.toml
 JuliaNotebooks/Manifest.toml
 
-# Python caches & tests you don’t want
+# PythonCore tests & caches
 **/__pycache__/
 PythonCore/tests/
-generate_structure.py
 
-# VSCode & OS cruft
-.vscode/
-*.swp
-.DS_Store
+# raw-data folder
+data/
+
+Vlearning
+# your helper script
+generate_structure.py
