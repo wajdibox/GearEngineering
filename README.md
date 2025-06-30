@@ -144,6 +144,6 @@ julia> using Pkg; Pkg.instantiate()
 
 ## 📄 LICENSE & CREDITS
 
-See [LICENSE](LICENSE) for terms.
+NOT YET IMPLEMENTED.
 
-*Made with ❤️ by the Gear Engineering team.*
+*Made with ❤️ by the WAJDI ABBASSI.*
